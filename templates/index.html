@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market dashboard</title>
+    <style>
+    td:not(:first-child):not(:last-child) {
+            text-align: right;
+    }
+    </style>
+  </head>
+  <body>
+    <h1>Market Dashboard</h1>
+    {% for category in results["categories"] %}
+    <h2>{{ category }}</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Market</th>
+          <th>Current price</th>
+          <th>Change (%)</th>
+          <th>Headlines</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in results[category] %}
+        <tr>
+          <td>{{ item["name"] }}</td>
+          <td>{{ item["current_price"] | round(2) }}</td>
+          <td>{{ item["change_percentage"] | round(2) }}</td>
+          <td>
+            <ul>
+              {% for headline in item["headlines"] %}
+              <li>{{ headline["content"]["title"] }}</li>
+              {% endfor %}
+            </ul>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endfor %}
+  </body>
+</html>
