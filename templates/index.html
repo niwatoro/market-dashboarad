@@ -6,7 +6,19 @@
     <title>Market dashboard</title>
     <style>
     td:not(:first-child):not(:last-child) {
-            text-align: right;
+      text-align: right;
+    }
+
+    td:first-child {
+      text-align: center;
+    }
+
+    td:first-child, td:nth-child(2), td:nth-child(3) {
+      width: 10%;
+    }
+    
+    td:nth-child(2), td:nth-child(3) {
+      padding: 1rem;
     }
     </style>
   </head>
@@ -14,7 +26,7 @@
     <h1>Market Dashboard</h1>
     {% for category in results["categories"] %}
     <h2>{{ category }}</h2>
-    <table border="1">
+    <table border="1" style="width: 100%;">
       <thead>
         <tr>
           <th>Market</th>
@@ -32,7 +44,7 @@
           <td>
             <ul>
               {% for headline in item["headlines"] %}
-              <li>{{ headline["content"]["title"] }}</li>
+              <li><a href="{{ headline['content']['canonicalUrl']['url'] }}" target="__blank">{{ headline["content"]["title"] }} ({{ headline["content"]["pubDate"] }})</a></li>
               {% endfor %}
             </ul>
         </tr>

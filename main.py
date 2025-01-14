@@ -31,6 +31,7 @@ def fetch_data(ticker):
         ) * 100
 
         headlines = data.news[:3] if hasattr(data, "news") else []
+        print(headlines[0])
 
         return {
             "current_price": current_price,
